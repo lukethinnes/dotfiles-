@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/Users/_jacksanders/learn/learnMods/6mod/typescript/theme_park_w_tests'
+let g:netrw_dirhist_1='/Users/_jacksanders/learn/learnMods/6mod/calcstuff'
+let g:netrw_dirhist_0='/Users/_jacksanders/learn/learnMods/6mod/calcstuff/venv/bin'
+let g:netrw_dirhist_9='/Users/_jacksanders/learn/learnMods/6mod/calcstuff/venv'
+let g:netrw_dirhist_8='/Users/_jacksanders/.config/ranger'
+let g:netrw_dirhist_7='/Users/_jacksanders/.config'
+let g:netrw_dirhist_6='/Users/_jacksanders/.config/nvim'
+let g:netrw_dirhist_5='/Users/_jacksanders/learn/learnMods/6mod/typescript/kyle_Oball/object-ball'
+let g:netrw_dirhist_4='/Users/_jacksanders/.local/share'
+let g:netrw_dirhist_3='/Users/_jacksanders/.local'
