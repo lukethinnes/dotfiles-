@@ -228,6 +228,13 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
+" VIMSPECTOR DUBUGGER
+let g:vimspector_enable_mappings = 'HUMAN'
+packadd! vimspector
+
+
+
+
 " Buffer management
 nnoremap <Leader>ff :CtrlP<CR> " Find a file in the current folder recursively
 nnoremap <Leader>d :bd<CR> " Delete current buffer
