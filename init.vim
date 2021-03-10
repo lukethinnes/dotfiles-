@@ -44,6 +44,10 @@ Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
 call plug#end()
 
 " General config
@@ -78,6 +82,7 @@ set autoread
 set title
 set scrolloff=5
 set sidescrolloff=7
+set guicursor=       
 set relativenumber
 set wildmenu
 set wildchar=<TAB>
@@ -214,6 +219,13 @@ nnoremap <Leader>gg :Gcommit -v -q %:p<CR> " Commits current file
 nnoremap <Leader>gp :Git push<CR>
 nnoremap <Leader>gm :Git merge<CR>
 
+
+" nvim telescope
+nnoremap <leader>ft <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
 " Buffer management
 nnoremap <Leader>ff :CtrlP<CR> " Find a file in the current folder recursively
 nnoremap <Leader>d :bd<CR> " Delete current buffer
@@ -245,9 +257,4 @@ map<leader>p "*P
 
 "spell check toggle is <F5>
 :map <F5> :setlocal spell! spelllang=en_us<CR>
-
-
-
-
-
 
