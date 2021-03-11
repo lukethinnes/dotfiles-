@@ -221,24 +221,46 @@ nnoremap <Leader>gg :Gcommit -v -q %:p<CR> " Commits current file
 nnoremap <Leader>gp :Git push<CR>
 nnoremap <Leader>gm :Git merge<CR>
 
-
-" nvim telescope
+"TELESCOPE
 nnoremap <leader>ft <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-" VIMSPECTOR DUBUGGER
-let g:vimspector_enable_mappings = 'HUMAN'
-packadd! vimspector
+" >>MAXIMIZER FOR THE DEBUGGER
+nnoremap <leader>, :MaximizerToggle!<CR>
+"VIMSPECTOR DUBUGGER
+fun! GotoWindow(id)
+    call win_gotoid(a:id)
+    MaximizerToggle
+endfun
+
+nnoremap <leader>dd :call vimspector#Launch()<CR>
+nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
+nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
+nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
+nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
+nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
+nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
+nnoremap <leader>de :call vimspector#Reset()<CR>
+
+nnoremap <leader>dtcb :call vimspector#CleanLineBreakpoint()<CR>
+
+nmap <leader>dl <Plug>VimspectorStepInto
+nmap <leader>dj <Plug>VimspectorStepOver
+nmap <leader>dk <Plug>VimspectorStepOut
+nmap <leader>d_ <Plug>VimspectorRestart
+nnoremap <leader>d<space> :call vimspector#Continue()<CR>
+
+nmap <leader>drc <Plug>VimspectorRunToCursor
+nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
+nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
 
 
-
-
-" Buffer management
+"BUFFER MANAGEMENT
 nnoremap <Leader>ff :CtrlP<CR> " Find a file in the current folder recursively
-nnoremap <Leader>d :bd<CR> " Delete current buffer
-nnoremap <Leader>D :bd!<CR> " Delete current buffer
+nnoremap <Leader>x :bd<CR> " Delete current buffer
+nnoremap <Leader>X :bd!<CR> " Delete current buffer
 nnoremap <Leader>n :bn<CR> " Next buffer
 nnoremap <Leader>N :bN<CR> " Previous buffer
 nnoremap <Leader>t :enew<CR> " Make a new empty buffer
@@ -265,5 +287,5 @@ vnoremap <leader>y "*y
 map<leader>p "*P  
 
 "spell check toggle is <F5>
-:map <F5> :setlocal spell! spelllang=en_us<CR>
+:map <F4> :setlocal spell! spelllang=en_us<CR>
 
