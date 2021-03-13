@@ -245,6 +245,7 @@ nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
 nnoremap <leader>de :call vimspector#Reset()<CR>
 
 nnoremap <leader>dtcb :call vimspector#CleanLineBreakpoint()<CR>
+nnoremap <leader>dX :call vimspector#ClearBreakpoints()><CR>
 
 nmap <leader>dl <Plug>VimspectorStepInto
 nmap <leader>dj <Plug>VimspectorStepOver
@@ -256,6 +257,14 @@ nmap <leader>drc <Plug>VimspectorRunToCursor
 nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
 nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
 
+nnoremap <leader>d? :call AddToWatch()<CR>
+func! AddToWatch() 
+  let word = expand("<cexpr>")
+  call vimspector#AddToWatch(word)
+endfunction
+
+" TOGGLE THIS ON TO DEBUG SERVERS/OFF FOR LOCAL (MAKE  YOUR OWN VIM SPEC JSON)
+" let g:vimspector_base_dir = expand('$HOME/.config/vimspector-config')
 
 "BUFFER MANAGEMENT
 nnoremap <Leader>ff :CtrlP<CR> " Find a file in the current folder recursively
