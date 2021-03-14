@@ -260,7 +260,7 @@ nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
 nnoremap <leader>d? :call AddToWatch()<CR>
 func! AddToWatch() 
   let word = expand("<cexpr>")
-  call vimspector#AddToWatch(word)
+  call vimspector#AddWatch(word)
 endfunction
 
 " TOGGLE THIS ON TO DEBUG SERVERS/OFF FOR LOCAL (MAKE  YOUR OWN VIM SPEC JSON)
