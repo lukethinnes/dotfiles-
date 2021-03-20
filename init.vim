@@ -4,14 +4,12 @@
 " _/ // / / / / /__| |/ / / / / / / /
 "/___/_/ /_/_/\__(_)___/_/_/ /_/ /_/
 
-
 " Plugins. run the command :PlugInstall to set changes
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-
 
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'Shougo/neobundle.vim'
@@ -52,7 +50,7 @@ Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 call plug#end()
 
-" General config
+" GENERAL CONFIG
 inoremap jj <ESC>
 inoremap jk <ESC>
 syntax enable
@@ -96,13 +94,13 @@ set listchars=trail:·,nbsp:⚋
 set fillchars=fold:-
 set updatetime=100 " Keeps gitgutter speedy
 
-" Leader
+" LEADER
 let mapleader=" "
 
-" Typescript
+" TYPESCRIPT
 autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
 
-" Go
+" GO
 au FileType go set noexpandtab
 au FileType go set shiftwidth=4
 au FileType go set softtabstop=4
@@ -136,29 +134,29 @@ highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 let g:airline#extensions#ale#enabled = 1
 autocmd BufWritePost *.js ALEFix
 
-" Ultisnips snippets 
+" ULTISSNIPS SNIPPETS
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsListSnippets="<c-tab>"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/general/path/of/snippets/']
 
-"Remapped snippets
+"REMAPPED SNIPPETS, *PUT A .vimspector snippet in there 
 nnoremap <leader>! ihb_t!
 nnoremap <leader>rf! irf_c!
 
 
-" Deoplete
+" DEOPLETE
 let g:deoplete#enable_at_startup = 1
 " let g:python_host_prog = '/full/path/to/neovim2/bin/python'
 " let g:python3_host_prog = '/full/path/to/neovim3/bin/python'
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" vim.ack
+" VIM.ACK
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
-" Pencil
+" PENCIL
 let g:pencil#wrapModeDefault = 'soft'
 let g:pencil#textwidth = 84
 augroup pencil
@@ -167,37 +165,33 @@ augroup pencil
     autocmd FileType text call pencil#init({'wrap': 'hard'})
 augroup END
 
-" Goyo
-let g:goyo_width=90
-
-"Onedark 
+" ONEDARK 
 let g:onedark_hide_endofbuffer = 0
 let g:onedark_termcolors=16
 let g:onedark_terminal_italics = 1
 
-" Airline
+" AIRLINE
 let g:airline_theme='onedark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
-" Status line
+" STATUS LINES
 set statusline+=%#warningmsg#
 set statusline+=%*
 
-" Colors
+" COLORS
 colorscheme onedark
 set background=dark
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
-" Ctrlp
+" CTRL-P
 let g:ctrlp_use_caching=0
 let g:ctrlp_custom_ignore = 'bin$\|build$\|node_modules$\|tmp$\|dist$\|.git|.bak|.swp|.pyc|.class'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_files=0
 let g:ctrlp_max_height = 18
 
-
-" Find and replace
+" FIND AND REPLACE
 function! VisualFindAndReplace()
     :OverCommandLine%s/
 endfunction
@@ -207,7 +201,8 @@ endfunction
 nnoremap <Leader>fr :call VisualFindAndReplace()<CR>
 xnoremap <Leader>fr :call VisualFindAndReplaceWithSelection()<CR>
 
-" Goyo
+" GOYO
+let g:goyo_width=90
 nnoremap <leader>m :Goyo<cr>
 
 " Fugitive
@@ -221,15 +216,15 @@ nnoremap <Leader>gg :Gcommit -v -q %:p<CR> " Commits current file
 nnoremap <Leader>gp :Git push<CR>
 nnoremap <Leader>gm :Git merge<CR>
 
-"TELESCOPE
+" TELESCOPE
 nnoremap <leader>ft <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-" >>MAXIMIZER FOR THE DEBUGGER
+" MAXIMIZER FOR THE DEBUGGER
 nnoremap <leader>, :MaximizerToggle!<CR>
-"VIMSPECTOR DUBUGGER
+" VIMSPECTOR DUBUGGER
 fun! GotoWindow(id)
     call win_gotoid(a:id)
     MaximizerToggle
@@ -275,26 +270,25 @@ nnoremap <Leader>N :bN<CR> " Previous buffer
 nnoremap <Leader>t :enew<CR> " Make a new empty buffer
 nnoremap <Tab> :b#<CR> " Tab between buffers
 
-" Eslint
+" ESLINT
 nnoremap <Leader>e :new<Bar>0r!npm run lint<CR> " Run eslint in vue
 
-" Split navigation
+" SPLIT NAVIGATION
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" Newline Generation
+" NEWLINE GENERATION
 nmap <C-o> O<Esc>
 nmap <CR> o<Esc>
 
 nnoremap <Leader>. @: " Repeat last ex command
 nnoremap <Leader>r :set relativenumber!<CR> " Toggle relative line numbers
 
-"copy/paste to clipboard
+" YANK/PUT FROM/TO CLIPBOARD
 vnoremap <leader>y "*y 
 map<leader>p "*P  
 
-"spell check toggle is <F5>
+" SPELLCHECK TOGGLE IS <F4>
 :map <F4> :setlocal spell! spelllang=en_us<CR>
-
