@@ -141,10 +141,10 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsListSnippets="<c-tab>"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/general/path/of/snippets/']
 
-"REMAPPED SNIPPETS, *PUT A .vimspector snippet in there 
+"REMAPPED SNIPPETS, 
 nnoremap <leader>! ihb_t!
 nnoremap <leader>rf! irf_c!
-
+nnoremap <leader>vs! ivs__jp " .vimspector.json 
 
 " DEOPLETE
 let g:deoplete#enable_at_startup = 1
@@ -221,7 +221,6 @@ nnoremap <leader>ft <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
 " MAXIMIZER FOR THE DEBUGGER
 nnoremap <leader>, :MaximizerToggle!<CR>
 " VIMSPECTOR DUBUGGER
@@ -229,7 +228,6 @@ fun! GotoWindow(id)
     call win_gotoid(a:id)
     MaximizerToggle
 endfun
-
 nnoremap <leader>dd :call vimspector#Launch()<CR>
 nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
 nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
