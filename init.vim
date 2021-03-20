@@ -143,7 +143,7 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/general/path/of/snippets/']
 
 "REMAPPED SNIPPETS, 
 nnoremap <leader>! ihb_t!
-nnoremap <leader>rf! irf_c!
+nnoremap <leader>rf! irf__c
 nnoremap <leader>vs! ivs__jp " .vimspector.json 
 
 " DEOPLETE
