@@ -12,7 +12,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin(stdpath('data') . '/plugged')
-Plug 'Shougo/neobundle.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -49,6 +48,23 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 call plug#end()
+
+" ~THEMES AND COLORS~
+
+" ONEDARK 
+let g:onedark_hide_endofbuffer = 0
+let g:onedark_termcolors=16
+let g:onedark_terminal_italics = 1
+
+" AIRLINE
+let g:airline_theme='onedark'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
+" COLORS
+colorscheme onedark
+set background=dark
+highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
 " GENERAL CONFIG
 inoremap jj <ESC>
@@ -153,7 +169,7 @@ let g:deoplete#enable_at_startup = 1
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" VIM.ACK
+" ACK.VIM
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " PENCIL
@@ -165,24 +181,9 @@ augroup pencil
     autocmd FileType text call pencil#init({'wrap': 'hard'})
 augroup END
 
-" ONEDARK 
-let g:onedark_hide_endofbuffer = 0
-let g:onedark_termcolors=16
-let g:onedark_terminal_italics = 1
-
-" AIRLINE
-let g:airline_theme='onedark'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-
 " STATUS LINES
 set statusline+=%#warningmsg#
 set statusline+=%*
-
-" COLORS
-colorscheme onedark
-set background=dark
-highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
 " CTRL-P
 let g:ctrlp_use_caching=0
