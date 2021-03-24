@@ -144,7 +144,7 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/general/path/of/snippets/']
 "REMAPPED SNIPPETS, 
 nnoremap <leader>! ihb_t!
 nnoremap <leader>rf! irf__c
-nnoremap <leader>vs! ivs__jp " .vimspector.json 
+nnoremap <leader>vs! ivs__j
 
 " DEOPLETE
 let g:deoplete#enable_at_startup = 1
@@ -236,7 +236,7 @@ nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
 nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
 nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
 nnoremap <leader>de :call vimspector#Reset()<CR>
-
+" JUMP AROUND
 nnoremap <leader>dtcb :call vimspector#CleanLineBreakpoint()<CR>
 nnoremap <leader>dX :call vimspector#ClearBreakpoints()><CR>
 
