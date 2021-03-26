@@ -47,25 +47,36 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
+Plug 'gruvbox-community/gruvbox'
 call plug#end()
 
 " ~THEMES AND COLORS~
-
-" ONEDARK 
-let g:onedark_hide_endofbuffer = 0
-let g:onedark_termcolors=16
-let g:onedark_terminal_italics = 1
-
-" AIRLINE
-let g:airline_theme='onedark'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-
-" COLORS
-colorscheme onedark
+colorscheme gruvbox
+let g:gruvbox_contrast_dark = 'medium'
 set background=dark
+
+" ~JACK OG~
+" ONEDARK 
+" let g:onedark_hide_endofbuffer = 0
+" let g:onedark_termcolors=16
+" let g:onedark_terminal_italics = 1
+
+" " AIRLINE change theme back to 'onedark'
+" let g:airline_theme='onedark'
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline_powerline_fonts = 1
+
+" " COLORS
+" colorscheme onedark
+" set background=dark
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
+" Gruvbox stuff for tabs 
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_theme='gruvbox'
+"
 " GENERAL CONFIG
 inoremap jj <ESC>
 inoremap jk <ESC>
@@ -74,10 +85,13 @@ command E Ex " Disambiguates E
 filetype plugin on
 filetype indent on
 set encoding=utf-8
+set exrc
 set laststatus=2
 set nocompatible
 set nowrap
 set ignorecase smartcase
+set incsearch
+set nohlsearch
 set t_Co=256
 set number
 set tabstop=2
@@ -96,7 +110,7 @@ set history=999
 set undolevels=999
 set autoread
 set title
-set scrolloff=5
+set scrolloff=8
 set sidescrolloff=7
 set guicursor=       
 set relativenumber
