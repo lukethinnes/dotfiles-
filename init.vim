@@ -3,8 +3,8 @@
 "   / // __ \/ / __/ | / / / __ `__ \
 " _/ // / / / / /__| |/ / / / / / / /
 "/___/_/ /_/_/\__(_)___/_/_/ /_/ /_/
-
-" Plugins. run the command :PlugInstall to set changes
+"
+" PLUGINS, RUN :PlugInstall TO SET CHANGES
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -48,13 +48,13 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 Plug 'gruvbox-community/gruvbox'
+Plug 'mrk21/yaml-vim'
 call plug#end()
 
 " ~THEMES AND COLORS~
 colorscheme gruvbox
 let g:gruvbox_contrast_dark = 'medium'
 set background=dark
-
 " ~JACK OG~
 " ONEDARK 
 " let g:onedark_hide_endofbuffer = 0
