@@ -271,7 +271,8 @@ func! AddToWatch()
   call vimspector#AddWatch(word)
 endfunction
 
-" TOGGLE THIS ON TO DEBUG SERVERS/OFF FOR LOCAL (MAKE  YOUR OWN VIM SPEC JSON)
+" TOGGLE FOR DEBUG SERVERS/OFF FOR LOCAL 
+" OFF IS LOCAL, ON IS GLOBAL
 " let g:vimspector_base_dir = expand('$HOME/.config/vimspector-config')
 
 "BUFFER MANAGEMENT
