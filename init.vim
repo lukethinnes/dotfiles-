@@ -66,7 +66,7 @@ set background=dark
 " let g:airline#extensions#tabline#enabled = 1
 " let g:airline_powerline_fonts = 1
 
-" " COLORS
+" " COLORS, THESE ARE THE COLORS FOR THE OG SCHEME:
 " colorscheme onedark
 " set background=dark
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
@@ -171,7 +171,7 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsListSnippets="<c-tab>"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/general/path/of/snippets/']
 
-"REMAPPED SNIPPETS, 
+"REMAPPED SNIPPETS, TO SEE THEM TYPE :Ultisnips edit, FOR THAT FILE TYPE 
 nnoremap <leader>! ihb_t!
 nnoremap <leader>rf! irf__c
 nnoremap <leader>vs! ivs__j
