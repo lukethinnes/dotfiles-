@@ -51,6 +51,10 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'mrk21/yaml-vim'
 call plug#end()
 
+
+"FIND REGEX PLUGIN
+
+
 " ~THEMES AND COLORS~
 colorscheme gruvbox
 let g:gruvbox_contrast_dark = 'medium'
