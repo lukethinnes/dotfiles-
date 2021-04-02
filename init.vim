@@ -1,3 +1,4 @@
+"
 "    ____      _ __        _
 "   /  _/___  (_) /__   __(_)___ ___
 "   / // __ \/ / __/ | / / / __ `__ \
@@ -50,12 +51,6 @@ Plug 'szw/vim-maximizer'
 Plug 'gruvbox-community/gruvbox'
 Plug 'mrk21/yaml-vim'
 call plug#end()
-" GRAB MORE GO PLUGINS
-
-
-  
-"FIND REGEX PLUGIN
-
 
 " ~THEMES AND COLORS~
 colorscheme gruvbox
@@ -130,6 +125,10 @@ set listchars=trail:·,nbsp:⚋
 set fillchars=fold:-
 set updatetime=100 " Keeps gitgutter speedy
 
+" VIM-YAML
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+let g:indentLine_char = '⦙'
+
 " LEADER
 let mapleader=" "
 
@@ -186,6 +185,9 @@ nnoremap <leader>vs! ivs__j
 let g:deoplete#enable_at_startup = 1
 " let g:python_host_prog = '/full/path/to/neovim2/bin/python'
 " let g:python3_host_prog = '/full/path/to/neovim3/bin/python'
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'~/go/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
