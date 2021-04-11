@@ -1,4 +1,5 @@
 "
+"
 "    ____      _ __        _
 "   /  _/___  (_) /__   __(_)___ ___
 "   / // __ \/ / __/ | / / / __ `__ \
@@ -180,11 +181,17 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/general/path/of/snippets/']
 nnoremap <leader>! ihb_t!
 nnoremap <leader>rf! irf__c
 nnoremap <leader>vs! ivs__j
+nnoremap <leader>kdep ikdep_y
+nnoremap <leader>kser ikser_y 
+nnoremap <leader>ksec iksec_y 
+nnoremap <leader>king iking_y
+nnoremap <leader>kcon ikcon_y
+nnoremap <leader>kpvc ikpvc_y
 
 " DEOPLETE
+" let g:python_host_prog = '/usr/bin/python'
+" let g:python3_host_prog = '/usr/bin/python3'
 let g:deoplete#enable_at_startup = 1
-" let g:python_host_prog = '/full/path/to/neovim2/bin/python'
-" let g:python3_host_prog = '/full/path/to/neovim3/bin/python'
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'~/go/bin/gocode'
 let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
