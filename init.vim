@@ -187,6 +187,7 @@ nnoremap <leader>ksec iksec_y
 nnoremap <leader>king iking_y
 nnoremap <leader>kcon ikcon_y
 nnoremap <leader>kpvc ikpvc_y
+nnoremap <leader>kvol ikvol_y
 
 " DEOPLETE
 " let g:python_host_prog = '/usr/bin/python'
