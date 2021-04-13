@@ -295,8 +295,8 @@ endfunction
 nnoremap <Leader>ff :CtrlP<CR> " Find a file in the current folder recursively
 nnoremap <Leader>x :bd<CR> " Delete current buffer
 nnoremap <Leader>X :bd!<CR> " Delete current buffer
-nnoremap <Leader>n :bn<CR> " Next buffer
-nnoremap <Leader>N :bN<CR> " Previous buffer
+nnoremap <Leader>n :bn!<CR> " Next buffer
+nnoremap <Leader>N :bN!<CR> " Previous buffer
 nnoremap <Leader>t :enew<CR> " Make a new empty buffer
 nnoremap <Tab> :b#<CR> " Tab between buffers
 
