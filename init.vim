@@ -1,19 +1,13 @@
-"
-"
-"    ____      _ __        _
-"   /  _/___  (_) /__   __(_)___ ___
-"   / // __ \/ / __/ | / / / __ `__ \
-" _/ // / / / / /__| |/ / / / / / / /
-"/___/_/ /_/_/\__(_)___/_/_/ /_/ /_/
-"
-" PLUGINS, RUN :PlugInstall TO SET CHANGES
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+" curl -fL ~/.config/nvim/autoload/plug.vim --create-dirs \
+"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-call plug#begin(stdpath('data') . '/plugged')
+
+" set noncompatible	" be iMproved, required
+filetype off		" required
+
+call plug#begin('~/.config/nvim/plugged')
+Plug 'habamax/vim-gruvbit'
+Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -22,9 +16,11 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
+Plug 'wakatime/vim-wakatime'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-commentary'
 Plug 'osyo-manga/vim-over'
+Plug 'madskjeldgaard/supercollider-h4x-nvim'
 Plug 'thinca/vim-qfreplace'
 Plug 'kshenoy/vim-signature'
 Plug 'editorconfig/editorconfig-vim'
@@ -35,6 +31,7 @@ Plug 'mileszs/ack.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'dense-analysis/ale'
 Plug 'sirVer/ultisnips'
+Plug 'davidgranstrom/scnvim', { 'do': {-> scnvim#install() } }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mhartington/nvim-typescript', {'for': ['typescript', 'tsx'], 'do': './install.sh' }
@@ -49,15 +46,22 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
+Plug 'sbdchd/neoformat'
 Plug 'gruvbox-community/gruvbox'
 Plug 'mrk21/yaml-vim'
 call plug#end()
 
 " ~THEMES AND COLORS~
-colorscheme gruvbox
-let g:gruvbox_contrast_dark = 'medium'
-set background=dark
-" ~JACK OG~
+augroup colorscheme_change | au!
+    au ColorScheme gruvbit hi Comment gui=italic cterm=italic
+augroup END
+set termguicolors
+colorscheme gruvbit
+" ~OLD THEME~
+" colorscheme gruvbox
+" let g:gruvbox_contrast_dark = 'medium'
+" set background=dark
+
 " ONEDARK 
 " let g:onedark_hide_endofbuffer = 0
 " let g:onedark_termcolors=16
@@ -82,6 +86,17 @@ let g:airline_theme='gruvbox'
 " GENERAL CONFIG
 inoremap jj <ESC>
 inoremap jk <ESC>
+nnoremap Y y$
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+nnoremap <C-j> :cnext<CR>zzzv
+nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
+nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
 syntax enable
 command E Ex " Disambiguates E
 filetype plugin on
@@ -130,11 +145,11 @@ set updatetime=100 " Keeps gitgutter speedy
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 let g:indentLine_char = '⦙'
 
+" Prettier on save
+autocmd BufWritePre *.js Neoformat
+
 " LEADER
 let mapleader=" "
-
-" TYPESCRIPT
-autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
 
 " GO
 au FileType go set noexpandtab
@@ -322,3 +337,7 @@ map<leader>p "*P
 
 " SPELLCHECK TOGGLE IS <F4>
 :map <F4> :setlocal spell! spelllang=en_us<CR>
+
+" SUPERCOLLIDER CONFIG
+autocmd filetype supercollider,scnvim,scdoc,supercollider.help lua require'supercollider-h4x'.setup()
+
