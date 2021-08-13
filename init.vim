@@ -412,7 +412,7 @@ map<leader>p "*P
 
 " SPELLCHECK TOGGLE IS <F4>
 :map <F4> :setlocal spell! spelllang=en_us<CR>
-
+"
 " SUPERCOLLIDER CONFIG
 autocmd filetype supercollider,scnvim,scdoc,supercollider.help lua require'supercollider-h4x'.setup()
 
