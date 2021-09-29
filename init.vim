@@ -1,5 +1,4 @@
 "
-"
 "    ____      _ __        _
 "   /  _/___  (_) /__   __(_)___ ___
 "   / // __ \/ / __/ | / / / __ `__ \
@@ -9,12 +8,17 @@
 " curl -fL ~/.config/nvim/autoload/plug.vim --create-dirs \
 "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-
 " set noncompatible	" be iMproved, required
 filetype off		" required
 
 call plug#begin('~/.config/nvim/plugged')
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'branch': 'release/0.x'
+  \ }
+Plug 'junegunn/fzf'
 Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'lotabout/skim.vim'
 Plug 'habamax/vim-gruvbit'
 Plug 'alvan/vim-closetag'
@@ -23,41 +27,40 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'wsdjeg/dein-ui.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'wakatime/vim-wakatime'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-commentary'
+Plug 'preservim/nerdcommenter'
 Plug 'osyo-manga/vim-over'
 Plug 'madskjeldgaard/supercollider-h4x-nvim'
 Plug 'thinca/vim-qfreplace'
 Plug 'kshenoy/vim-signature'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'neovim/nvim-lspconfig'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'reedes/vim-pencil'
 Plug 'junegunn/goyo.vim'
 Plug 'posva/vim-vue'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'mileszs/ack.vim'
+Plug 'mattn/emmet-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'dense-analysis/ale'
 Plug 'sirVer/ultisnips'
-Plug 'mhartington/nvim-typescript', { 'build': './install.sh' }
 Plug 'davidgranstrom/scnvim', { 'do': {-> scnvim#install() } }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/ddc.vim'
+Plug 'Shougo/dein.vim'
+Plug 'deoplete-plugins/deoplete-clang'
 Plug 'Shougo/denite.nvim'
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mhartington/nvim-typescript', {'for': ['typescript', 'tsx'], 'do': './install.sh' }
-Plug 'Shougo/deoplete.nvim'  
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -65,66 +68,14 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 Plug 'neovim/nvim-lspconfig'
-Plug 'sbdchd/neoformat'
+Plug 'hrsh7th/nvim-compe'
 Plug 'gruvbox-community/gruvbox'
 Plug 'mrk21/yaml-vim'
+Plug 'crispgm/nvim-go'
+Plug 'fatih/vim-go'
 Plug 'nvim-treesitter/nvim-treesitter', {'branch' : '0.5-compat'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects', {'branch' : '0.5-compat'}
 call plug#end()
-
-"Enable DEOPLETE
-let g:deoplete#enable_at_startup = 1
-
-" Language
-let g:LanguageClient_autoStart = 1
-
-" Minimal LSP configuration for JavaScript
-let g:LanguageClient_serverCommands = {}
-if executable('javascript-typescript-stdio')
-  let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
-  " Use LanguageServer for omnifunc completion
-  autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
-else
-  echo "javascript-typescript-stdio not installed!\n"
-  :cq
-endif
-
-" LUA attempt
-lua << EOF
-local nvim_lsp = require('lspconfig')
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-  local opts = { noremap=true, silent=true }
-  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-end
-local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
-end
-EOF
 
 " ~THEMES AND COLORS~
 augroup colorscheme_change | au!
@@ -157,7 +108,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_theme='gruvbox'
-"
+
 " GENERAL CONFIG
 inoremap jj <ESC>
 inoremap jk <ESC>
@@ -216,17 +167,144 @@ set listchars=trail:·,nbsp:⚋
 set fillchars=fold:-
 set updatetime=100 " Keeps gitgutter speedy
 
+" COC.NVIM
+" if hidden is not set, TextEdit might fail.
+set hidden
+
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Better display for messages
+set cmdheight=2
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <S-TAB> <Plug>(coc-range-select-backword)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
 " VIM-YAML
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 let g:indentLine_char = '⦙'
-
-" Prettier on save
-autocmd BufWritePre *.js Neoformat
 
 " LEADER
 let mapleader=" "
 
 " GO
+lua <<EOF
+require('go').setup({})
+require('lspconfig').gopls.setup({})
+require('go').config.update_tool('quicktype', function(tool)
+	tool.pkg_mgr = 'npm'
+end)
+EOF
 au FileType go set noexpandtab
 au FileType go set shiftwidth=4
 au FileType go set softtabstop=4
@@ -266,6 +344,9 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsListSnippets="<c-tab>"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/general/path/of/snippets/']
+
+" PRETTIER 
+let g:prettier#autoformat_require_pragma = 0
 
 "REMAPPED SNIPPETS, TO SEE THEM TYPE :Ultisnips edit, FOR THAT FILE TYPE 
 nnoremap <leader>! ihb_t!
@@ -342,8 +423,10 @@ nnoremap <leader>ft <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
 " MAXIMIZER FOR THE DEBUGGER
 nnoremap <leader>, :MaximizerToggle!<CR>
+
 " VIMSPECTOR DUBUGGER
 fun! GotoWindow(id)
     call win_gotoid(a:id)
@@ -357,6 +440,7 @@ nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
 nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
 nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
 nnoremap <leader>de :call vimspector#Reset()<CR>
+
 " JUMP AROUND
 nnoremap <leader>dtcb :call vimspector#CleanLineBreakpoint()<CR>
 nnoremap <leader>dX :call vimspector#ClearBreakpoints()><CR>
@@ -412,7 +496,7 @@ map<leader>p "*P
 
 " SPELLCHECK TOGGLE IS <F4>
 :map <F4> :setlocal spell! spelllang=en_us<CR>
-"
+
 " SUPERCOLLIDER CONFIG
 autocmd filetype supercollider,scnvim,scdoc,supercollider.help lua require'supercollider-h4x'.setup()
 
@@ -422,4 +506,4 @@ noremap <leader>S :call system("sonic_pi stop")<CR>
 let g:sonicpi_command = 'sonic-pi-tool'
 let g:sonicpi_send = 'eval-stdin'
 let g:sonicpi_stop = 'stop'
-let g:vim_redraw = 1
+
